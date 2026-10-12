@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Digital Signage Kampus</title>
+    <!-- Mengambil Font Modern 'Poppins' dari Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Desain Latar Belakang Modern (Gradient) */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* Biru Elegan */
+            color: #ffffff; 
+            overflow: hidden; 
+        }
+        
+        /* GAYA KACA TEMBUS PANDANG (GLASSMORPHISM) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Header */
+        .header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 40px; margin: 15px;
+        }
+        .logo-title h1 { margin: 0; font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        .logo-title p { margin: 5px 0 0 0; font-size: 16px; color: #e0e0e0; font-weight: 300; }
+        .datetime { text-align: right; }
+        .time { font-size: 40px; font-weight: 700; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .date { font-size: 16px; margin: 0; color: #e0e0e0; font-weight: 300; }
+
+        /* Area Utama */
+        .main-container { 
+            display: flex; height: calc(100% - 190px); gap: 20px; padding: 0 20px; 
+        }
+        
+        /* Kiri: Video & Interaktif */
+        .left-panel { flex: 2.5; display: flex; flex-direction: column; gap: 20px; }
+        .video-wrapper { 
+            flex: 1; border-radius: 16px; overflow: hidden; position: relative;
+        }
+        .video-wrapper iframe { 
+            width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0;
+        }
+
+        /* Kanan: Sidebar Jadwal Modern */
+        .sidebar { flex: 1; padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+        .widget h2 { 
+            margin: 0 0 20px 0; font-size: 22px; font-weight: 600; 
+            border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;
+        }
+        
+        .agenda-item { 
+            background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 12px; margin-bottom: 12px;
+            border-left: 5px solid #00f2fe; transition: transform 0.3s;
+        }
+        .agenda-item:hover { transform: translateX(10px); }
+        .agenda-time { font-size: 13px; font-weight: 600; color: #00f2fe; margin-bottom: 5px; display: block; }
+        .agenda-title { margin: 0; font-size: 16px; font-weight: 600; }
+        .agenda-loc { margin: 5px 0 0 0; font-size: 13px; color: #cccccc; }
+
+        /* Fitur QR Code (Modern) */
+        .qr-section {
+            display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.3); 
+            padding: 15px; border-radius: 12px; margin-top: auto;
+        }
+        .qr-section img { width: 80px; height: 80px; border-radius: 8px; }
+        .qr-text h3 { margin: 0 0 5px 0; font-size: 16px; color: #00f2fe; }
+        .qr-text p { margin: 0; font-size: 12px; color: #cccccc; }
+
+        /* Running Text Modern */
+        .footer { 
+            position: absolute; bottom: 15px; left: 15px; right: 15px;
+            height: 55px; display: flex; align-items: center; overflow: hidden;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); border-radius: 10px;
+        }
+        .marquee-label {
+            background: linear-gradient(90deg, #ff416c 0%, #ff4b2b 100%);
+            color: white; height: 100%; padding: 0 25px;
+            display: flex; align-items: center; font-weight: 700; font-size: 18px; z-index: 10;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+        .marquee-container { flex: 1; white-space: nowrap; font-size: 18px; }
+        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+    </style>
+</head>
+<body>
+
+    <!-- Header Glassmorphism -->
+    <div class="header glass-panel">
+        <div class="logo-title">
+            <h1>PORTAL INFORMASI DIGITAL</h1>
+            <p>Program Studi D3 Analisis Transportasi</p>
+        </div>
+        <div class="datetime">
+            <p class="time" id="clock">00:00:00</p>
+            <p class="date" id="date">Memuat tanggal...</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        <!-- Video Panel -->
+        <div class="left-panel">
+            <div class="video-wrapper glass-panel">
+                <iframe src="https://www.youtube.com/embed/Gl74UIHHbuw?autoplay=1&mute=1&loop=1&playlist=Gl74UIHHbuw" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Sidebar Agenda Glassmorphism -->
+        <div class="sidebar glass-panel">
+            <div class="widget">
+                <h2>Jadwal Terkini</h2>
+                
+                <div class="agenda-item">
+                    <span class="agenda-time">Hari Ini • 07:10</span>
+                    <p class="agenda-title">Apel Pagi</p>
+                    <p class="agenda-loc">📍 Lapangan Hitam</p>
+                </div>
+                
+                <div class="agenda-item">
+                    <span class="agenda-time">Hari Ini • 12:30</span>
+                    <p class="agenda-title">Makan Siang</p>
+                    <p class="agenda-loc">📍 Ruang Makan</p>
+                </div>
+                
+                <div class="agenda-item">
+                    <span class="agenda-time">Hari Ini • Sore</span>
+                    <p class="agenda-title">Olahraga Sore</p>
+                    <p class="agenda-loc">📍 Tingkat 2: Lapangan Biru <br>📍 Tingkat 3: Lapangan Hitam</p>
+                </div>
+                
+                <div class="agenda-item">
+                    <span class="agenda-time">Hari Ini • 20:30</span>
+                    <p class="agenda-title">Apel Malam</p>
+                    <p class="agenda-loc">📍 Lapangan Hitam</p>
+                </div>
+            </div>
+
+            <!-- Tambahan Modern: QR Code Interaktif -->
+            <div class="qr-section">
+                <!-- Kode QR otomatis dari Google API (Bisa diarahkan ke link grup WA atau file PDF) -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://contoh-website-kampus.com/jadwal" alt="QR Code">
+                <div class="qr-text">
+                    <h3>Pindai (Scan) Jadwal</h3>
+                    <p>Arahkan kamera HP Anda untuk mengunduh jadwal & materi presentasi.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Running Text -->
+    <div class="footer">
+        <div class="marquee-label">PENGUMUMAN</div>
+        <div class="marquee-container">
+            <div class="marquee-content">
+                🔴 Batas akhir pengumpulan laporan magang adalah Jumat pukul 15.00 WIB &nbsp; | &nbsp; 🟢 Jangan lupa kenakan rompi lapangan untuk survei sore ini &nbsp; | &nbsp; 🔵 Persiapkan draf tugas akhir akademik Anda.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            
+            document.getElementById('date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); 
+    </script>
+</body>
+</html>
