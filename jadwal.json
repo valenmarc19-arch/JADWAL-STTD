@@ -1,0 +1,22 @@
+[
+  {
+    "waktu": "07:10",
+    "judul": "Apel Pagi",
+    "lokasi": "📍 Lapangan Hitam"
+  },
+  {
+    "waktu": "12:30",
+    "judul": "Makan Siang",
+    "lokasi": "📍 Ruang Makan"
+  },
+  {
+    "waktu": "Sore",
+    "judul": "Olahraga Sore",
+    "lokasi": "📍 Tingkat 2: Lapangan Biru <br>📍 Tingkat 3: Lapangan Hitam"
+  },
+  {
+    "waktu": "20:30",
+    "judul": "Apel Malam",
+    "lokasi": "📍 Lapangan Hitam"
+  }
+]
